@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Prototipos',
+      title: 'ScrollingText',
       //Cambia el estilo de la pantalla a Dark
       theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: mobileBackgroundColor,
@@ -42,14 +42,33 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          const Text('SCROLL',
+            style: TextStyle(
+              fontFamily: 'PressStart2P',
+              fontSize: 40,
+            ),
+          ),
+          const Text('TEXT',
+            style: TextStyle(
+              fontFamily: 'PressStart2P',
+              fontSize: 40,
+            ),
+          ),
+          const SizedBox(
+            height: 100,
+          ),
           //Form donde se introduce el texto
           Form(
             key: _formKey,
             child: TextFormField(
+
               controller: _textController,
               decoration: const InputDecoration(
                 hintText: 'Enter a text',
-                border: OutlineInputBorder(),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                ),
+                focusColor: mikadoYellowColor,
               ),
               validator: (String? value) { //Verifica que el form tenga un dato almenos
                 if (value == null || value.isEmpty) {
@@ -60,7 +79,13 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
 
+          SizedBox(height: 40,),
+
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: blueColor,
+
+            ),
             onPressed: () {
               if (_formKey.currentState!.validate()) {  //Valida que exista texto en el form
                 _formKey.currentState!.save();
@@ -70,7 +95,7 @@ class MyHomePage extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => HorizontalScrolling(
                       text: textForm,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 200.0,
                         color: Colors.purpleAccent,
                         fontFamily: 'VT323',
@@ -81,7 +106,11 @@ class MyHomePage extends StatelessWidget {
                 );
               }
             },
-            child: Text('Show'),
+            child: const Text('Show',
+              style: TextStyle(
+              color: Colors.white,
+            ),
+            ),
           ),
         ],
       ),
